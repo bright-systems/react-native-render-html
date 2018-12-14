@@ -64,7 +64,7 @@ export default class HTML extends PureComponent {
         tagsStyles: {},
         classesStyles: {},
         textSelectable: false,
-        allowFontScaling: true
+        allowFontScaling: false
     }
 
     constructor (props) {
