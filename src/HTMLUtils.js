@@ -1,11 +1,11 @@
 import TextStylesPropTypes from 'react-native/Libraries/Text/TextStylePropTypes';
-import ViewStylesPropTypes from 'react-native/Libraries/Components/View/ViewStylePropTypes';
-import ImageStylesPropTypes from 'react-native/Libraries/Image/ImageStylePropTypes';
+import DeprecatedViewStylePropTypes from 'react-native/Libraries/DeprecatedPropTypes/DeprecatedViewStylePropTypes';
+import DeprecatedImageStylesPropTypes from 'react-native/Libraries/DeprecatedPropTypes/DeprecatedImageStylePropTypes';
 
 // Filter prop-types that are only applicable to <Text> and not <View>
 export let TextOnlyPropTypes = {};
 Object.keys(TextStylesPropTypes).forEach((prop) => {
-    if (!ViewStylesPropTypes[prop]) {
+    if (!DeprecatedViewStylePropTypes[prop]) {
         TextOnlyPropTypes[prop] = TextStylesPropTypes[prop];
     }
 });
@@ -19,6 +19,9 @@ export const BLOCK_TAGS = ['address', 'article', 'aside', 'footer', 'hgroup', 'n
 export const TEXT_TAGS = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'figcaption', 'p', 'pre', 'abbr', 'b', 'bdi', 'bdo', 'code',
     'dfn', 'i', 'kbd', 'mark', 'q', 'rt', 's', 'samp', 'small', 'big', 'span', 'strong', 'sub', 'sup', 'time', 'u', 'var', 'wbr',
     'del', 'ins', 'blink', 'font', 'em', 'bold', 'br'];
+
+// Text in these tags should not be stripped from line breaks
+export const PREFORMATTED_TAGS = ['pre'];
 
 // These tags can either be mapped to View or Text wrappers, depending solely on their children
 export const MIXED_TAGS = ['a'];
@@ -57,10 +60,10 @@ export const PERC_SUPPORTED_STYLES = [
 // We have to do some munging here as the objects are wrapped
 const RNTextStylePropTypes = Object.keys(TextStylesPropTypes)
     .reduce((acc, k) => { acc[k] = TextStylesPropTypes[k]; return acc; }, {});
-const RNViewStylePropTypes = Object.keys(ViewStylesPropTypes)
-    .reduce((acc, k) => { acc[k] = ViewStylesPropTypes[k]; return acc; }, {});
-const RNImageStylePropTypes = Object.keys(ImageStylesPropTypes)
-    .reduce((acc, k) => { acc[k] = ImageStylesPropTypes[k]; return acc; }, {});
+const RNViewStylePropTypes = Object.keys(DeprecatedViewStylePropTypes)
+    .reduce((acc, k) => { acc[k] = DeprecatedViewStylePropTypes[k]; return acc; }, {});
+const RNImageStylePropTypes = Object.keys(DeprecatedImageStylesPropTypes)
+    .reduce((acc, k) => { acc[k] = DeprecatedImageStylesPropTypes[k]; return acc; }, {});
 
 export const STYLESETS = Object.freeze({ VIEW: 'view', TEXT: 'text', IMAGE: 'image' });
 
